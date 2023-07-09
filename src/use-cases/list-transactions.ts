@@ -9,8 +9,8 @@ export class ListTransactionsUseCase {
   // eslint-disable-next-line no-useless-constructor
   constructor(private transactionRepository: TransactionsRepository) {}
 
-  async execute(): Promise<ListTransactionUseCaseResponse> {
-    const transactions = await this.transactionRepository.list()
+  async execute(sessionId: string): Promise<ListTransactionUseCaseResponse> {
+    const transactions = await this.transactionRepository.list(sessionId)
 
     return {
       transactions,

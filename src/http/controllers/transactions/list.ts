@@ -3,12 +3,15 @@ import { ListTransactionsUseCase } from '@/use-cases/list-transactions'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function list(request: FastifyRequest, reply: FastifyReply) {
+  const { sessionId } = request.cookies
+
   const transactionRepository = new PrismaTransactionsRepository()
   const listTransactionsUseCase = new ListTransactionsUseCase(
     transactionRepository,
   )
 
-  const transactions = await listTransactionsUseCase.execute()
+  // eslint-disable-next-line prettier/prettier
+  const transactions = await listTransactionsUseCase.execute(sessionId!)
 
   return reply.status(200).send(transactions)
 }

@@ -2,8 +2,11 @@ import fastify from 'fastify'
 import { ZodError } from 'zod'
 import { env } from './env'
 import { transactionsRoutes } from './http/controllers/transactions/routes'
+import fastifyCookie from '@fastify/cookie'
 
 export const app = fastify()
+
+app.register(fastifyCookie)
 
 app.register(transactionsRoutes)
 

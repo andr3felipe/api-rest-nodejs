@@ -4,6 +4,7 @@ import { ResouceNotFoundError } from './errors/resource-not-found-error'
 
 interface GetTransactionUseCaseRequest {
   id: number
+  sessionId: string
 }
 
 interface GetTransactionUseCaseResponse {
@@ -16,8 +17,12 @@ export class GetTransactionUseCase {
 
   async execute({
     id,
+    sessionId,
   }: GetTransactionUseCaseRequest): Promise<GetTransactionUseCaseResponse> {
-    const transaction = await this.transactionRepository.findById(id)
+    const transaction = await this.transactionRepository.findById({
+      id,
+      sessionId,
+    })
 
     if (!transaction) {
       throw new ResouceNotFoundError()

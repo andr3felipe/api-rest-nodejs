@@ -1,6 +1,9 @@
 import { prisma } from '@/lib/prisma/prisma'
 import { Prisma } from '@prisma/client'
-import { TransactionsRepository } from '../transactions-repository'
+import {
+  TransactionsRepository,
+  findByIdProps,
+} from '../transactions-repository'
 
 export class PrismaTransactionsRepository implements TransactionsRepository {
   async create(data: Prisma.TransactionCreateInput) {
@@ -11,16 +14,21 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
     return transaction
   }
 
-  async list() {
-    const transactions = await prisma.transaction.findMany()
+  async list(sessionId: string) {
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        session_id: sessionId,
+      },
+    })
 
     return transactions
   }
 
-  async findById(id: number) {
-    const transaction = await prisma.transaction.findUnique({
+  async findById({ id, sessionId }: findByIdProps) {
+    const transaction = await prisma.transaction.findFirst({
       where: {
         id,
+        session_id: sessionId,
       },
     })
 
@@ -31,8 +39,11 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
     return transaction
   }
 
-  async summary() {
+  async summary(sessionId: string) {
     const { _sum: summary } = await prisma.transaction.aggregate({
+      where: {
+        session_id: sessionId,
+      },
       _sum: {
         amount: true,
       },

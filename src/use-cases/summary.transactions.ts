@@ -4,8 +4,8 @@ export class SummaryTransactionsUseCase {
   // eslint-disable-next-line no-useless-constructor
   constructor(private transactionsRepository: TransactionsRepository) {}
 
-  async execute() {
-    const summary = await this.transactionsRepository.summary()
+  async execute(sessionId: string) {
+    const summary = await this.transactionsRepository.summary(sessionId)
 
     return {
       summary,

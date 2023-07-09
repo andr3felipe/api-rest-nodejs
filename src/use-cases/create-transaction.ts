@@ -4,6 +4,7 @@ import { Transaction } from '@prisma/client'
 interface CreateTransactionUseCaseRequest {
   title: string
   amount: number
+  sessionId: string
 }
 
 interface CreateTransactionUseCaseResponse {
@@ -17,10 +18,12 @@ export class CreateTransactionUseCase {
   async execute({
     title,
     amount,
+    sessionId,
   }: CreateTransactionUseCaseRequest): Promise<CreateTransactionUseCaseResponse> {
     const transaction = await this.transactionRepository.create({
       title,
       amount,
+      session_id: sessionId,
     })
 
     return {

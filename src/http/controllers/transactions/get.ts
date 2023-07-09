@@ -10,10 +10,15 @@ export async function get(request: FastifyRequest, reply: FastifyReply) {
 
   const { id } = getTransactionBodySchema.parse(request.params)
 
+  const sessionIdCookie = request.cookies.sessionId
+
+  const sessionId = sessionIdCookie!
+
   const transactionRepository = new PrismaTransactionsRepository()
   const getTransactionUseCase = new GetTransactionUseCase(transactionRepository)
 
-  const transaction = await getTransactionUseCase.execute({ id })
+  // eslint-disable-next-line prettier/prettier
+  const transaction = await getTransactionUseCase.execute({ id, sessionId })
 
   return reply.status(200).send(transaction)
 }
