@@ -1,5 +1,5 @@
 import { PrismaTransactionsRepository } from '@/repositories/prisma/prisma-transactions-repository'
-import { GetTransactionUseCase } from '@/use-cases/get-transaction'
+import { GetTransactionUseCase } from '@/use-cases/transactions/get-transaction'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

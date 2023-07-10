@@ -1,5 +1,5 @@
 import { PrismaTransactionsRepository } from '@/repositories/prisma/prisma-transactions-repository'
-import { SummaryTransactionsUseCase } from '@/use-cases/summary.transactions'
+import { SummaryTransactionsUseCase } from '@/use-cases/transactions/summary.transactions'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function summary(request: FastifyRequest, reply: FastifyReply) {

@@ -1,6 +1,6 @@
 import { TransactionsRepository } from '@/repositories/transactions-repository'
 import { Transaction } from '@prisma/client'
-import { ResouceNotFoundError } from './errors/resource-not-found-error'
+import { ResouceNotFoundError } from '../errors/resource-not-found-error'
 
 interface GetTransactionUseCaseRequest {
   id: number

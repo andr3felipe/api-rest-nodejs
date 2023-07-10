@@ -1,5 +1,5 @@
 import { PrismaTransactionsRepository } from '@/repositories/prisma/prisma-transactions-repository'
-import { ListTransactionsUseCase } from '@/use-cases/list-transactions'
+import { ListTransactionsUseCase } from '@/use-cases/transactions/list-transactions'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function list(request: FastifyRequest, reply: FastifyReply) {

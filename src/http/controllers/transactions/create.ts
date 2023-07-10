@@ -1,5 +1,5 @@
 import { PrismaTransactionsRepository } from '@/repositories/prisma/prisma-transactions-repository'
-import { CreateTransactionUseCase } from '@/use-cases/create-transaction'
+import { CreateTransactionUseCase } from '@/use-cases/transactions/create-transaction'
 import { randomUUID } from 'crypto'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
